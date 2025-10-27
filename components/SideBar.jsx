@@ -2,13 +2,9 @@
 import Image from 'next/image'
 import React from 'react'
 import { assets } from "@/app/assets/assets";
-import { useClerk , UserButton} from '@clerk/nextjs';
-import { useAppContext } from '@/context/AppContext';
 
 const SideBar = ({expand , setExpand ,openMenu , setOpenMenu }) => {
 
-  const {openSignIn} = useClerk();
-  const {user} = useAppContext();
 
   return (
     <div
@@ -84,16 +80,14 @@ const SideBar = ({expand , setExpand ,openMenu , setOpenMenu }) => {
           </div>
 
           {/* bottom profile */}
-          <div onClick={user ? null : openSignIn} className=' cursor-pointer w-full px-3 flex gap-1 items-center pt-3'>
-            {
-              user ? <UserButton/> : <Image
+          <div className=' cursor-pointer w-full px-3 flex gap-1 items-center pt-3'>
+            <Image
               className="w-7 h-7 rounded-full cursor-pointer"
               src={assets.profile_icon}
               alt="user-profile"
             />
-            }
             <span className=' text-sm font-medium text-[#b3b3b9]'>
-              {user ? user.fullName : "sign in"}
+              sign in
             </span>
           </div>
         </div>
