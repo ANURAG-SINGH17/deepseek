@@ -33,8 +33,11 @@ export async function POST(req){
     )
 
     //send token as cookie
-    const res = NextResponse.json({message: "Login successful", user});
-    res.cookies.set("token" , token);
+    const res = NextResponse.json({message: "Login successful", user},{status:200});
+    res.cookies.set("token", token, {
+  httpOnly: true,
+  path: "/",
+});
 
     return res
 
