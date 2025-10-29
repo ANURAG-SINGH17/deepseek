@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const chatSchema = new mongoose.Schema({
     chatName: {
         type:String,
-        default:'New chat'
+        required:true
     },
     userId:{
         type:mongoose.Schema.Types.ObjectId,
