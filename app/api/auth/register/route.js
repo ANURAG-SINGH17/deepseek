@@ -43,7 +43,7 @@ export async function POST(req){
         return NextResponse.json({message: "JWT missing/invalid"}, {status: 401});;
     }
 
-    const res =  NextResponse.json({ message: "User registered successfully" , user});
+    const res =  NextResponse.json({ message: "User registered successfully"},{status:200});
 
     res.cookies.set("token",token);
 

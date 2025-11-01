@@ -22,7 +22,7 @@ export async function POST(req){
 
         const msg = await messageModel.find({chatId})
 
-        return NextResponse.json({msg},{status:201})
+        return NextResponse.json({msg},{status:200})
 
     }catch(err){
         console.log(err)

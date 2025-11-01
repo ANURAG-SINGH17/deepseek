@@ -18,13 +18,15 @@ export async function GET() {
     });
 
     const messagesRes = await messageModel.create({
-      name:'New chat',
       userId:user.id,
       chatId:chat._id,
       messages:[]
     })
 
-    return NextResponse.json({ chat , messagesRes}, { status: 201 });
+    const newchat =  await chatModel.findByIdAndUpdate(chat._id, { msgId: messagesRes._id }, { new: true });
+
+
+    return NextResponse.json({message:"New chat created" , newchat}, { status: 200});
 
   } catch (err) {
     console.log(err);

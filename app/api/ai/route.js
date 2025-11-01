@@ -57,7 +57,7 @@ export async function POST(req) {
       { new: true, upsert: true }
     );
 
-    return NextResponse.json({ reply: aiReply, chat: updatedChat });
+    return NextResponse.json({ reply: aiReply, chat: updatedChat } , {status:200});
 
   } catch (error) {
     console.error("AI Error:", error?.response?.data || error.message);

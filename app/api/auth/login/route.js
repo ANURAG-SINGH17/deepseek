@@ -12,11 +12,17 @@ export async function POST(req){
         return NextResponse.json({message: "All Fields are Required"}, {status: 400});
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email }).select('+password');
 
     if (!user) {
         return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
+    if (!user.password) {
+  return NextResponse.json(
+    { message: "password missing" },
+    { status: 401 }
+  );
+}
 
     // check password
     const isPasswordMatch = await bcrypt.compare(password,user.password);
@@ -33,11 +39,15 @@ export async function POST(req){
     )
 
     //send token as cookie
-    const res = NextResponse.json({message: "Login successful", user},{status:200});
+    const res = NextResponse.json({message: "Login successful"},{status:200});
     res.cookies.set("token", token, {
-  httpOnly: true,
-  path: "/",
-});
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    maxAge: 7 * 24 * 60 * 60, // 7 days
+    path: "/"
+  });
+
 
     return res
 
