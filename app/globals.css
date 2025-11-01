@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4d6bfe;
+}
+
+html, body {
+  height: -webkit-fill-available;
+}
+
+html{
+  @apply scroll-smooth;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.myscroll {
+  scrollbar-width: none; /* Firefox */
+}
+
+.myscroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
