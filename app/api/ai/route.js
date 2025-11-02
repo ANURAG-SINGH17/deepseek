@@ -1,5 +1,5 @@
 export const maxDuration = 60;
-
+import { connectDB } from "@/lib/config/db";
 import messageModel from "@/models/messageModel";
 import { verifyToken } from "@/utils/verifyToken";
 import axios from "axios";
@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-   
+   await connectDB();
     const { message , msgId} = await req.json();
     const user = await verifyToken();
 
@@ -34,6 +34,10 @@ export async function POST(req) {
       }
     );
 
+    if(!response){
+      return NextResponse.json({ error: "AI failed" }, { status: 500 });
+    }
+
     const aiReply = response.data.choices?.[0]?.message?.content || "No reply";
 
    const updatedChat = await messageModel.findOneAndUpdate(
@@ -59,6 +63,10 @@ export async function POST(req) {
       },
       { new: true, upsert: true }
     );
+
+    if (!updatedChat){
+          return NextResponse.json({ error: "msg not save in data base" }, { status: 500 });
+    }
 
     return NextResponse.json({ reply: aiReply, chat: updatedChat } , {status:200});
 

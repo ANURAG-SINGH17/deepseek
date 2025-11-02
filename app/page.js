@@ -26,6 +26,7 @@ const Home = () => {
       const ai = await axios.post('api/ai',{msgId , message:prompt});
       if(ai.status === 200){
         setPrompt("")
+        setLoad(false);
       const res = await axios.post("/api/chat/getchatmessage", { chatId });
       if (res.status === 200) {
         setPrompt("")
