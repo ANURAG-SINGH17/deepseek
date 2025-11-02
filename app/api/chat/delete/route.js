@@ -1,3 +1,5 @@
+export const maxDuration = 60;
+
 import chatModel from "@/models/chatModel";
 import messageModel from "@/models/messageModel";
 import { verifyToken } from "@/utils/verifyToken";

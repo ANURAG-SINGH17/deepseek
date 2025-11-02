@@ -1,3 +1,5 @@
+export const maxDuration = 60;
+
 import chatModel from "@/models/chatModel";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextResponse } from "next/server";

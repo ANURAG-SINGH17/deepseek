@@ -1,3 +1,5 @@
+export const maxDuration = 60;
+
 import userModel from "@/models/user.Model";
 import jwt from "jsonwebtoken";
 import connectDB from "@/config/db";
