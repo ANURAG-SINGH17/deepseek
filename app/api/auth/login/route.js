@@ -2,10 +2,15 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "@/models/user.Model";
+import {connectDB} from "@/lib/config/db";
 
+
+const LoadDB = async () => {
+    await connectDB();
+};
+LoadDB();
 
 export async function POST(req){
-
     const { email, password } = await req.json();
 
     if(!email || !password){

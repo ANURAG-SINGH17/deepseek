@@ -7,6 +7,7 @@ import { assets } from "@/app/assets/assets";
 
 export default function Signup() {
   const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password,setPassword] = useState("");
   const [confirmPassword,setConfirmPassword] = useState("");
@@ -17,7 +18,7 @@ export default function Signup() {
     e.preventDefault();
     setError("");
 
-    if(!email || !password || !confirmPassword){
+    if(!name || !email || !password || !confirmPassword){
       setError("Please fill all fields");
       return;
     }
@@ -32,7 +33,7 @@ export default function Signup() {
       const res = await fetch("/api/auth/register",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({email,password})
+        body:JSON.stringify({name,email,password})
       });
 
       const data = await res.json();
@@ -77,11 +78,23 @@ export default function Signup() {
 
         {/* FORM */}
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          <label className="block">
+            <span className="text-sm text-gray-300">Full Name</span>
+            <input
+              type="text"
+              value={name}
+              onChange={(e)=>setName(e.target.value)}
+              placeholder="Enter your full name"
+              className="mt-1 block w-full rounded-md bg-[#1b1b1c] border border-[#2A3040] shadow-sm focus:border-indigo-500 p-3 text-white"
+              required
+            />
+          </label>
           
           <label className="block">
             <span className="text-sm text-gray-300">Email</span>
             <input
-              type="text"
+              type="email"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
               placeholder="you@domain.com"

@@ -1,10 +1,11 @@
+import { connectDB } from "@/lib/config/db";
 import chatModel from "@/models/chatModel";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextResponse } from "next/server";
 
 export async function GET(){
     try{
-
+        await connectDB();
         const user = await verifyToken();
 
         if (!user) {

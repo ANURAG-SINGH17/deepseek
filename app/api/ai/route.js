@@ -1,5 +1,6 @@
 export const maxDuration = 60;
 
+import { connectDB } from "@/config/db";
 import messageModel from "@/models/messageModel";
 import { verifyToken } from "@/utils/verifyToken";
 import axios from "axios";
@@ -7,6 +8,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
+    await connectDB();
     const { message , msgId} = await req.json();
     const user = await verifyToken();
 

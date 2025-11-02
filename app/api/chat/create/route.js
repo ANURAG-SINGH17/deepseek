@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/verifyToken";
 import chatModel from "@/models/chatModel";
 import messageModel from "@/models/messageModel";
+import { connectDB } from "@/lib/config/db";
 
 export async function GET() {
   try {
-
+    await connectDB();
     const user = await verifyToken();
 
     if (!user) {

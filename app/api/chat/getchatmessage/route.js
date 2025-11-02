@@ -1,3 +1,4 @@
+import { connectDB } from "@/lib/config/db";
 import messageModel from "@/models/messageModel";
 import { verifyToken } from "@/utils/verifyToken";
 import { NextResponse } from "next/server";
@@ -5,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(req){
     
     try{
-
+        await connectDB();
         const {chatId} = await req.json();
 
         if (!chatId) {

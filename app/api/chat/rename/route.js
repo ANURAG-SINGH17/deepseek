@@ -5,7 +5,6 @@ import { verifyToken } from "@/utils/verifyToken";
 export async function POST(req){
 
     try{
-        
     const {chatId , name} = await req.json();
 
     const user = await verifyToken();
