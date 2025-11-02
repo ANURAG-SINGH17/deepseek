@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { assets } from "@/app/assets/assets";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   const router = useRouter();
@@ -39,12 +40,14 @@ export default function Signup() {
       const data = await res.json();
       if(!res.ok){
         setError(data.message || "Signup failed");
+        toast.error("Signup failed")
         return;
       }
-
-      router.push("/signup");
+      toast.success("Account created successfully 🎉")
+      router.push("/signin");
     }catch(err){
       setError("Something went wrong");
+      toast.error("Authentication failed — try again")
     }finally{
       setLoading(false);
     }

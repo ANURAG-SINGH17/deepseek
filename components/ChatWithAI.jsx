@@ -83,10 +83,10 @@ useEffect(() => {
                   } mb-2`}
                 >
                   <div
-                    className={`p-3 rounded-lg${
+                    className={`p-3 rounded-lg ${
                       msg.role === "assistant"
                         ? "flex gap-2 md:text-sm text-xs p-3 rounded-lg md:max-w-[93%] max-w-[100%]"
-                        : "bg-[#1d1d27] md:text-sm text-xs p-3 rounded-lg md:max-w-[80%] max-w-[100%]"
+                        : "bg-[#1d1d2c] md:text-sm text-xs p-3 rounded-lg md:max-w-[80%] max-w-[100%]"
                     }`}
                   >
                     {" "}

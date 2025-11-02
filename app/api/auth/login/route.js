@@ -15,8 +15,6 @@ export async function POST(req){
 
     const user = await userModel.findOne({ email }).select('+password');
 
-    console.log(email , user)
-
     if (!user) {
         return NextResponse.json({ message: "User not found" }, { status: 404 });
     }

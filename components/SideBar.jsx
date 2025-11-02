@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { assets } from "@/app/assets/assets";
 import axios from "axios";
 import Loader from "./Loader";
+import { toast } from "react-toastify";
 
 const SideBar = ({
   expand,
@@ -74,12 +75,14 @@ const SideBar = ({
       fetchdata();
 
       if (res.status === 200) {
+        toast.success("Chat renamed successfully")
         setNewName(" ");
         setInputId(null);
         setOpenMenuId(null);
         // console.log("updated chatname");
       }
     } catch (err) {
+      toast.error("Failed to rename chat")
       console.log(err);
     }
   };
@@ -91,15 +94,17 @@ const SideBar = ({
       const res = await axios.post("/api/chat/delete", { chatId });
       if (res.status === 200) {
         fetchdata();
+        toast.success("Chat deleted")
         setChatAI(false)
         setOpenMenuId(null);
         setLoadingCir(false);
-        fetchdata();
       } else {
         setLoadingCir(false);
+        toast.error("something went wrong!");
       }
     } catch {
       console.log(err);
+      toast.error("Unable to delete chat")
       setLoadingCir(false);
     }
   };

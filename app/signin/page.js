@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { assets } from "@/app/assets/assets";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function Signup() {
       if (res.status === 200) {
         setSuccess(true);
         setRedirecting(true);
+        toast.success("Login successful")
         router.prefetch("/");
         
         setTimeout(() => {
@@ -47,6 +49,7 @@ export default function Signup() {
       }
     } catch (err) {
       console.log(err)
+      toast.error("Try again later")
       setError("Something went wrong");
     } finally {
       setLoading(false);

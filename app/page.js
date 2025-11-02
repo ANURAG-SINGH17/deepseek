@@ -5,6 +5,7 @@ import DesktopMenu from "@/components/DesktopMenu";
 import SideBar from "@/components/SideBar";
 import InputBox from "@/components/InputBox";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
 
 const Home = () => {
   const [expand, setExpand] = useState(false);
@@ -12,7 +13,7 @@ const Home = () => {
   const [openMenuId, setOpenMenuId] = useState(false);
   const [chatList, setChatList] = useState();
   const [showChatAI, setChatAI] = useState(false);
-  const [prompt, setPrompt] = useState();
+  const [prompt, setPrompt] = useState("");
   const [load, setLoad] = useState(false);
   const [data , setData] = useState({
     chatId:"",
@@ -23,10 +24,12 @@ const Home = () => {
   const sendPromptToAI = async (chatId , msgId) => {
     try {
       // console.log(prompt , chatId , msgId);
+      toast.info("Hold on… AI is crafting your answer 🤖");
       const ai = await axios.post('api/ai',{msgId , message:prompt});
       if(ai.status === 200){
         setPrompt("")
         setLoad(false);
+        toast.success("Generating response… 🧠")
       const res = await axios.post("/api/chat/getchatmessage", { chatId });
       if (res.status === 200) {
         setPrompt("")
@@ -42,6 +45,7 @@ const Home = () => {
       }
       setPrompt("");
     } catch (err) {
+      toast.error("❌ Something went wrong. Try again!");
       setPrompt("")
       console.log(err);
     }
@@ -67,6 +71,7 @@ const Home = () => {
   const createNewChat = async () => {
     try {
       setLoad(true)
+      toast.info("Just a moment! Great answers take time 😄")
       const res = await axios.get("api/chat/create");
       if (res.status === 200) {
         getChatList(res.data.newchat._id , res.data.newchat.msgId);
@@ -81,6 +86,7 @@ const Home = () => {
 
   return (
     <div>
+    <ToastContainer theme="dark"/>
       <div className="h-[100vh] w-full bg-[#151517] text-white flex overflow-hidden">
         {/* Top Menu mobile*/}
         <MobileMenu setExpand={setExpand} />
