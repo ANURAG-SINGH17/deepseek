@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGODB_URL = process.env.MONGO_URL;
+const MONGODB_URL = process.env.MONGODB_URL;
 if (!MONGODB_URL) throw new Error("⚠️ MONGO_URL is missing");
 
 let cached = global.mongoose || { conn: null, promise: null };
