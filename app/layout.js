@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./prism.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,6 +23,7 @@ export default function RootLayout({ children }) {
       </head>
 
       <body className={`${inter.className} antialiased`}>
+          <ToastContainer theme="dark"/>
         {children}
       </body>
     </html>

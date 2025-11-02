@@ -5,7 +5,7 @@ import DesktopMenu from "@/components/DesktopMenu";
 import SideBar from "@/components/SideBar";
 import InputBox from "@/components/InputBox";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 
 const Home = () => {
   const [expand, setExpand] = useState(false);
@@ -86,7 +86,6 @@ const Home = () => {
 
   return (
     <div>
-    <ToastContainer theme="dark"/>
       <div className="h-[100vh] w-full bg-[#151517] text-white flex overflow-hidden">
         {/* Top Menu mobile*/}
         <MobileMenu setExpand={setExpand} />
