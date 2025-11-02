@@ -42,7 +42,6 @@ export async function POST(req){
     const res = NextResponse.json({message: "Login successful"},{status:200});
     res.cookies.set("token", token, {
     httpOnly: true,
-    secure: true,
     sameSite: "lax",
     maxAge: 7 * 24 * 60 * 60, // 7 days
     path: "/"
