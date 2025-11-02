@@ -31,7 +31,7 @@ export default function Login() {
         email,
         password,
       });
-
+      console.log(res)
       if (res.status === 200) {
         setSuccess(true);
         setRedirecting(true);
