@@ -3,21 +3,19 @@ import mongoose from "mongoose";
 const MONGODB_URL = process.env.MONGODB_URL;
 if (!MONGODB_URL) throw new Error("⚠️ MONGO_URL is missing");
 
-let cached = global.mongoose || { conn: null, promise: null };
+let globalConn = global._mongoose || { conn: null, promise: null };
 
-export const connectDB = async () => {
-  if (cached.conn) return cached.conn;
+export async function connectDB() {
+  if (globalConn.conn) return globalConn.conn;
 
-  if (!cached.promise) {
-    cached.promise = mongoose
-      .connect(MONGODB_URL, {
-        dbName: "deepseek"
-      })
-      .then((mongoose) => mongoose);
+  if (!globalConn.promise) {
+    globalConn.promise = mongoose
+      .connect(MONGODB_URL, { dbName: "deepseek" })
+      .then(mongoose => mongoose);
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
-};
+  globalConn.conn = await globalConn.promise;
+  return globalConn.conn;
+}
 
-global.mongoose = cached;
+global._mongoose = globalConn;
