@@ -6,11 +6,6 @@ import bcryptPassword from "@/utils/bcryptPassword";
 import validator from "validator"
 
 
-const LoadDB = async () => {
-    await connectDB();
-};
-LoadDB();
-
 export async function POST(req){
     const {name , email , password} = await req.json();
 
