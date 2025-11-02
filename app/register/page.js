@@ -42,7 +42,7 @@ export default function Signup() {
         return;
       }
 
-      router.push("/login");
+      router.push("/signup");
     }catch(err){
       setError("Something went wrong");
     }finally{

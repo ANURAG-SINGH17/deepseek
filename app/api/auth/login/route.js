@@ -5,12 +5,8 @@ import userModel from "@/models/user.Model";
 import {connectDB} from "@/lib/config/db";
 
 
-const LoadDB = async () => {
-    await connectDB();
-};
-LoadDB();
-
 export async function POST(req){
+  await connectDB();
     const { email, password } = await req.json();
 
     if(!email || !password){
@@ -18,6 +14,8 @@ export async function POST(req){
     }
 
     const user = await userModel.findOne({ email }).select('+password');
+
+    console.log(email , user)
 
     if (!user) {
         return NextResponse.json({ message: "User not found" }, { status: 404 });

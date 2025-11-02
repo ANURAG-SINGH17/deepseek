@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { assets } from "@/app/assets/assets";
 import axios from "axios";
 
-export default function Login() {
+export default function Signup() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +46,7 @@ export default function Login() {
         setError(res.data.message || "Login failed");
       }
     } catch (err) {
+      console.log(err)
       setError("Something went wrong");
     } finally {
       setLoading(false);
