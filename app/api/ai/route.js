@@ -1,3 +1,5 @@
+export const maxDuration = 60;
+
 import messageModel from "@/models/messageModel";
 import { verifyToken } from "@/utils/verifyToken";
 import axios from "axios";
